@@ -13,11 +13,27 @@ import 'rest.dart';
 import '../models/todo.dart';
 
 class TodoService {
-  static Future<List<Todo>> getTodoListByUser(int userId) async {}
+  static Future<List<Todo>> getTodoListByUser(int userId) async {
+    final List listJson = await Rest.get('todos?user=$userId');
 
-  static Future<Todo> addTodo(Todo todo) async {}
+    if (listJson.isEmpty) return null;
 
-  static Future<Todo> updateTodo(Todo todo) async {}
+    return listJson.map((json) => Todo.fromJson(json)).toList();
+  }
 
-  static Future<void> removeTodo(Todo todo) async {}
+  static Future<Todo> addTodo(Todo todo) async {
+    final json = await Rest.post('todos', data: todo);
+
+    return Todo.fromJson(json);
+  }
+
+  static Future<Todo> updateTodo(Todo todo) async {
+    final json = await Rest.put('todos/${todo.id}', data: todo);
+
+    return Todo.fromJson(json);
+  }
+
+  static Future<void> removeTodo(Todo todo) async {
+    await Rest.delete('todos/${todo.id}');
+  }
 }
