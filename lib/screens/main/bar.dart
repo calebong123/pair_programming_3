@@ -28,17 +28,49 @@ class Bar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading:
-          CircleAvatar(backgroundImage: AssetImage('assets/unknown_user.png')),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('My Todo List'),
-          Text('User name goes here', style: TextStyle(fontSize: 12.0)),
-        ],
-      ),
-      actions: [IconButton(icon: Icon(Icons.login), onPressed: () {})],
-    );
+    return _state.user != null
+        ? AppBar(
+            leading: CircleAvatar(
+                backgroundImage: NetworkImage('${_state.user.photoUrl}')),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('My Todo List'),
+                Text('${_state.user.name}', style: TextStyle(fontSize: 12.0)),
+              ],
+            ),
+            actions: [
+              IconButton(
+                  icon: Icon(Icons.login), onPressed: () => _onLogoutPressed())
+            ],
+          )
+        : AppBar(
+            leading: CircleAvatar(
+                backgroundImage: AssetImage('assets/unknown_user.png')),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('My Todo List'),
+                Text('User name goes here', style: TextStyle(fontSize: 12.0)),
+              ],
+            ),
+            actions: [
+              IconButton(
+                  icon: Icon(Icons.login),
+                  onPressed: () => _onLoginPressed(context))
+            ],
+          );
+  }
+
+  void _onLoginPressed(BuildContext context) async {
+    final _user = await Navigator.pushNamed(context, '/login');
+
+    if (_user != null) {
+      _state.user = _user;
+    }
+  }
+
+  void _onLogoutPressed() {
+    _state.user = null;
   }
 }

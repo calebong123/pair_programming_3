@@ -35,15 +35,19 @@ class Body extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildTextField(
-            hint: 'Username', icon: Icons.people, onChanged: (value) => () {}),
+            hint: 'Username',
+            icon: Icons.people,
+            onChanged: (value) => _state.username = value),
         _buildTextField(
             hint: 'Password',
-            isObsecure: false,
+            isObsecure: !_state.showPassword,
             icon: Icons.lock,
-            button: IconButton(icon: Icon(Icons.visibility), onPressed: () {}),
-            onChanged: (value) => () {}),
+            button: IconButton(
+                icon: Icon(Icons.visibility),
+                onPressed: () => _state.showPassword = !_state.showPassword),
+            onChanged: (value) => _state.password = value),
         Text(
-          'Invalid username or password!',
+          _state.isLogin ? '' : 'Invalid user or password!',
           style: TextStyle(color: Colors.red, fontSize: 20.0),
         ),
         SizedBox(height: 10.0),
@@ -71,14 +75,28 @@ class Body extends StatelessWidget {
       children: [
         ElevatedButton(
           child: Text('Log in'),
-          onPressed: () {},
+          onPressed: () => _onLoginPressed(context),
         ),
         SizedBox(width: 10.0),
         ElevatedButton(
           child: Text('Cancel'),
-          onPressed: () {},
+          onPressed: () => _onCancelPressed(context),
         ),
       ],
     );
+  }
+
+  void _onLoginPressed(BuildContext context) async {
+    final _user = await UserService.getUserByLoginAndPassword(
+        login: _state.username, password: _state.password);
+
+    if (_user == null)
+      _state.isLogin = false;
+    else
+      Navigator.pop(context, _user);
+  }
+
+  void _onCancelPressed(BuildContext context) {
+    Navigator.pop(context, false);
   }
 }

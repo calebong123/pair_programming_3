@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 
 class Rest {
   //? Change the baseUrl according to your PC's IP address. Remain the port as 3000
-  static const String _baseUrl = 'http://192.168.0.5:3000';
+  static const String _baseUrl = 'http://192.168.0.184:3000';
 
   // Send a GET request to retrieve data from a REST server
   static Future get(String endpoint) async {
