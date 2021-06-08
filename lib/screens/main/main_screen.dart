@@ -90,7 +90,13 @@ class MainScreenState extends State<MainScreen> {
     }
   }
 
-  void removeTodo(int index) async {}
+  void removeTodo(int index) async {
+    await TodoService.removeTodo(todoList[index]);
+
+    setState(() {
+      _todoList.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

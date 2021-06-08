@@ -57,13 +57,6 @@
       "done": false,
       "id": 6,
       "user": null
-    },
-    {
-      "title": "a new todo update",
-      "description": "a new description",
-      "done": true,
-      "id": 7,
-      "user": 1
     }
   ]
 }

@@ -47,7 +47,7 @@ class Body extends StatelessWidget {
                 : TextStyle(decoration: null)),
         subtitle: Text('${_state.todoList[index].description}'),
         onTap: () => _onTap(context, index),
-        onLongPress: () {},
+        onLongPress: () => _showAlertDialog(context, index),
       ),
     );
   }
@@ -59,5 +59,30 @@ class Body extends StatelessWidget {
     if (_editedTodo != null) {
       _state.updateTodo(index: index, todo: _editedTodo);
     }
+  }
+
+  void _showAlertDialog(context, index) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: Text('Delete?'),
+              content: Text('Are you sure?'),
+              actions: [
+                FlatButton(
+                    onPressed: () => _isCancel(context), child: Text('No')),
+                FlatButton(
+                    onPressed: () => _isDelete(context, index),
+                    child: Text('Yes'))
+              ],
+              elevation: 24.0,
+            ));
+  }
+
+  void _isDelete(context, index) {
+    Navigator.pop(context, _state.removeTodo(index));
+  }
+
+  void _isCancel(context) {
+    Navigator.pop(context, false);
   }
 }
