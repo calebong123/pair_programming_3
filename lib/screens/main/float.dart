@@ -31,7 +31,7 @@ class Float extends StatelessWidget {
             tooltip: 'Refresh',
             child: Icon(Icons.refresh),
             heroTag: null,
-            onPressed: () {})
+            onPressed: () => _onRefreshPressed())
       ],
     );
   }
@@ -42,4 +42,6 @@ class Float extends StatelessWidget {
 
     if (_newTodo != null) _state.addTodo(_newTodo);
   }
+
+  void _onRefreshPressed() => _state.getAllTodoList();
 }

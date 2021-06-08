@@ -1,7 +1,7 @@
 ### Use this file to test out your REST call before implementing them in the code
 
 ### Change the IP address below to your PC's IP address. Remain the port number 3000 unchanged
-@baseUrl = http://192.168.0.5:3000
+@baseUrl = http://192.168.0.184:3000
 
 ### Request 1 : Get a user whose correct 'login' and 'password'
 ### Purpose   : To simulate the authentication process. 
@@ -16,9 +16,9 @@ POST {{baseUrl}}/todos
 Content-Type: application/json
 
 {
-    "user": 2,
-    "title": "A new todo",
-    "description": "This is a new todo",
+    "user": 1,
+    "title": "hello world",
+    "description": "This is a new world",
     "done": false
 }
 

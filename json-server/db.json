@@ -57,6 +57,13 @@
       "done": false,
       "id": 6,
       "user": null
+    },
+    {
+      "user": 1,
+      "title": "hello world",
+      "description": "This is a new world",
+      "done": false,
+      "id": 7
     }
   ]
 }

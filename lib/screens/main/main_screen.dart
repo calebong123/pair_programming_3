@@ -71,8 +71,11 @@ class MainScreenState extends State<MainScreen> {
   set todoListFuture(value) => _todoListFuture = value;
 
   void getAllTodoList() {
-    if (_user != null) _todoListFuture = TodoService.getTodoListByUser(user.id);
-    setState(() {});
+    if (_user != null) {
+      setState(() {
+        _todoListFuture = TodoService.getTodoListByUser(user.id);
+      });
+    }
   }
 
   void addTodo(Todo todo) async {
