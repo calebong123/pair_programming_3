@@ -31,6 +31,10 @@ class EditScreen extends StatefulWidget {
 }
 
 class EditScreenState extends State<EditScreen> {
+  void isDone(bool value) {
+    setState(() => widget.data.done = value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

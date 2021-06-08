@@ -46,9 +46,18 @@ class Body extends StatelessWidget {
                 ? TextStyle(decoration: TextDecoration.lineThrough)
                 : TextStyle(decoration: null)),
         subtitle: Text('${_state.todoList[index].description}'),
-        onTap: () {},
+        onTap: () => _onTap(context, index),
         onLongPress: () {},
       ),
     );
+  }
+
+  void _onTap(BuildContext context, int index) async {
+    final _editedTodo = await Navigator.pushNamed(context, '/edit',
+        arguments: Todo.copy(_state.todoList[index]));
+
+    if (_editedTodo != null) {
+      _state.updateTodo(index: index, todo: _editedTodo);
+    }
   }
 }

@@ -80,7 +80,16 @@ class MainScreenState extends State<MainScreen> {
     setState(() => _todoList.add(_todo));
   }
 
-  void updateTodo({int index, Todo todo}) async {}
+  void updateTodo({int index, Todo todo}) async {
+    final Todo _todo = await TodoService.updateTodo(todo);
+
+    if (_todo != null) {
+      setState(() {
+        _todoList[index] = _todo;
+      });
+    }
+  }
+
   void removeTodo(int index) async {}
 
   @override

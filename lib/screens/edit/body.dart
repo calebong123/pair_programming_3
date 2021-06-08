@@ -40,7 +40,7 @@ class Body extends StatelessWidget {
                   onChanged: (value) => _state.widget.data.description = value),
               CheckboxListTile(
                 value: _state.widget.data.done,
-                onChanged: (value) {},
+                onChanged: (value) => _onDonePressed(value),
                 title: Text('Done'),
               ),
               _buildButtons(context)
@@ -88,6 +88,10 @@ class Body extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _onDonePressed(bool value) {
+    _state.isDone(value);
   }
 
   void _onOkPressed(BuildContext context) {

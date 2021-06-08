@@ -38,11 +38,11 @@
       "done": false
     },
     {
-      "id": 4,
-      "user": 1,
       "title": "Subscribe to an internet service",
       "description": "Plan to subscribe a fibre optic based service. Potential provider: TM Unifi and Maxis",
-      "done": false
+      "done": false,
+      "id": 4,
+      "user": 1
     },
     {
       "id": 5,
@@ -59,9 +59,9 @@
       "user": null
     },
     {
-      "title": "a new todo",
+      "title": "a new todo update",
       "description": "a new description",
-      "done": false,
+      "done": true,
       "id": 7,
       "user": 1
     }
