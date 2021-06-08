@@ -27,24 +27,38 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        _buildTextLisTile(
-            label: 'Title',
-            value: 'Todo title goes here',
-            onChanged: (value) {}),
-        _buildTextLisTile(
-            label: 'Description',
-            value: 'Todo description goes here',
-            onChanged: (value) {}),
-        CheckboxListTile(
-          value: false,
-          onChanged: (value) {},
-          title: Text('Done'),
-        ),
-        _buildButtons(context)
-      ],
-    );
+    return _state.widget.isEditing
+        ? ListView(
+            children: [
+              _buildTextLisTile(
+                  label: 'Title',
+                  value: '${_state.widget.data.title}',
+                  onChanged: (value) => _state.widget.data.title = value),
+              _buildTextLisTile(
+                  label: 'Description',
+                  value: '${_state.widget.data.description}',
+                  onChanged: (value) => _state.widget.data.description = value),
+              CheckboxListTile(
+                value: _state.widget.data.done,
+                onChanged: (value) {},
+                title: Text('Done'),
+              ),
+              _buildButtons(context)
+            ],
+          )
+        : ListView(
+            children: [
+              _buildTextLisTile(
+                  label: 'Title',
+                  value: '',
+                  onChanged: (value) => _state.widget.data.title = value),
+              _buildTextLisTile(
+                  label: 'Description',
+                  value: '',
+                  onChanged: (value) => _state.widget.data.description = value),
+              _buildButtons(context)
+            ],
+          );
   }
 
   ListTile _buildTextLisTile({label, value, onChanged}) {
@@ -65,14 +79,22 @@ class Body extends StatelessWidget {
       children: [
         ElevatedButton(
           child: Text('Ok'),
-          onPressed: () {},
+          onPressed: () => _onOkPressed(context),
         ),
         SizedBox(width: 10.0),
         ElevatedButton(
           child: Text('Cancel'),
-          onPressed: () {},
+          onPressed: () => _onCancelPressed(context),
         ),
       ],
     );
+  }
+
+  void _onOkPressed(BuildContext context) {
+    Navigator.pop(context, _state.widget.data);
+  }
+
+  void _onCancelPressed(BuildContext context) {
+    Navigator.pop(context, null);
   }
 }

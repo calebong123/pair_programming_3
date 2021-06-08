@@ -25,7 +25,7 @@ class Float extends StatelessWidget {
           tooltip: 'Add a new todo',
           child: Icon(Icons.add),
           heroTag: null,
-          onPressed: () {},
+          onPressed: () => _onAddPressed(context),
         ),
         FloatingActionButton(
             tooltip: 'Refresh',
@@ -34,5 +34,12 @@ class Float extends StatelessWidget {
             onPressed: () {})
       ],
     );
+  }
+
+  void _onAddPressed(BuildContext context) async {
+    final _newTodo =
+        await Navigator.pushNamed(context, '/new', arguments: _state.user.id);
+
+    if (_newTodo != null) _state.addTodo(_newTodo);
   }
 }

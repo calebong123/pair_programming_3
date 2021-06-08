@@ -19,7 +19,8 @@ Route<dynamic> createRoute(settings) {
       return LoginScreen.route();
 
     case '/new':
-      return EditScreen.route(isEditing: false, data: Todo());
+      return EditScreen.route(
+          isEditing: false, data: Todo(user: settings.arguments));
 
     case '/edit':
       return EditScreen.route(

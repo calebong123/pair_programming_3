@@ -38,7 +38,9 @@ class EditScreenState extends State<EditScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: Bar(),
-          body: Body(),
+          body: Body(
+            state: this,
+          ),
         ),
       ),
     );
